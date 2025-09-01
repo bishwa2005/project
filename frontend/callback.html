@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Logging in...</title>
+</head>
+<body>
+    <p>Please wait, logging you in...</p>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const token = params.get('token');
+            const userId = params.get('userId');
+
+            if (token && userId) {
+                localStorage.setItem('token', token);
+                // Redirect to the user's profile page
+                window.location.href = `profile.html?id=${userId}`;
+            } else {
+                // Redirect to login on failure
+                window.location.href = 'login.html';
+            }
+        });
+    </script>
+</body>
+</html>

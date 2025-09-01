@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f9fafb;
+  color: #333;
+}
+
+/* Navbar */
+.navbar {
+  background: #1d3557; /* Solid dark blue */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  transition: background-color 0.3s ease;
+}
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+.navbar .btn-light {
+    background-color: #a8dadc;
+    color: #1d3557;
+    font-weight: 500;
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(rgba(29,53,87,0.85), rgba(29,53,87,0.85)), 
+              url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+  color: white;
+  padding: 8rem 1.5rem;
+}
+.hero h1 {
+  font-weight: 700;
+  animation: fadeInDown 1s ease-out;
+}
+.hero p {
+  animation: fadeInUp 1.2s ease-out;
+}
+
+/* Section Title Styling */
+.section-title {
+    font-weight: 700;
+    color: #1d3557;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px;
+}
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background-color: #a8dadc; /* Light accent blue */
+    border-radius: 2px;
+}
+
+/* Feature Cards */
+.feature-card {
+  padding: 30px;
+  background: white;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+.feature-icon {
+    font-size: 3rem;
+    color: #457b9d; /* Mid blue */
+    margin-bottom: 1rem;
+}
+
+/* Domains Slider Section */
+.domain-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    height: 100%;
+}
+.domain-icon {
+    font-size: 2.5rem;
+    color: #1d3557;
+    background-color: #f1faee; /* Lightest color */
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+.swiper-pagination-bullet-active {
+    background-color: #1d3557 !important;
+}
+
+/* Call to Action (CTA) Section */
+.cta-section {
+    background: #457b9d; /* Mid blue */
+}
+
+/* Footer */
+footer {
+  background: #1d3557;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Question - College Connect</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class="container-fluid">
+        <a class="navbar-brand" href="connect.html">College Connect</a>
+        <div class="d-flex align-items-center">
+            <a href="connect.html" class="btn btn-outline-light me-2">Connect</a><a href="forum.html" class="btn btn-outline-light me-2">Q&A Forum</a><a href="leaderboard.html" class="btn btn-outline-light me-2">Leaderboard</a><a href="#" id="my-profile-link" class="btn btn-outline-info me-3">My Profile</a>
+            <span id="user-name-display" class="navbar-text me-3"></span><button id="logout-button" class="btn btn-danger">Logout</button>
+        </div>
+    </div></nav>
+    <div class="container mt-4">
+        <div id="question-details"></div><hr><h3 class="mt-4">Answers</h3><div id="answers-list"></div>
+        <div class="card mt-4"><div class="card-body">
+            <h5 class="card-title">Your Answer</h5>
+            <form id="post-answer-form">
+                <div class="mb-3"><textarea class="form-control" id="answer-body" rows="5" required></textarea></div>
+                <button type="submit" class="btn btn-primary">Post Your Answer</button>
+            </form>
+        </div></div>
+    </div>
+    <script src="./js/question.js"></script>
+</body>
+</html>
