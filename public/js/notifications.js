@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const loadUserDetails = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/auth/me', { headers: { 'x-auth-token': token } });
+            const response = await fetch('/api/auth/me', { headers: { 'x-auth-token': token } });
             if (!response.ok) {
                 localStorage.removeItem('token');
                 window.location.href = 'login.html';
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const fetchRequests = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/connections/requests', { headers: { 'x-auth-token': token } });
+            const response = await fetch('/api/connections/requests', { headers: { 'x-auth-token': token } });
             const requests = await response.json();
             
             // Update notification badge in navbar
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const status = e.target.dataset.status;
             
             try {
-                const response = await fetch(`http://localhost:5000/api/connections/respond/${requesterId}`, {
+                const response = await fetch(`/api/connections/respond/${requesterId}`, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json', 'x-auth-token': token },
                     body: JSON.stringify({ status })
@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const loadUserDetails = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/auth/me', { headers: { 'x-auth-token': token } });
+            const response = await fetch('/api/auth/me', { headers: { 'x-auth-token': token } });
             if (!response.ok) {
                 localStorage.removeItem('token');
                 window.location.href = 'login.html';
@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const fetchRequests = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/connections/requests', { headers: { 'x-auth-token': token } });
+            const response = await fetch('/api/connections/requests', { headers: { 'x-auth-token': token } });
             const requests = await response.json();
             
             // Update notification badge in navbar
@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const status = e.target.dataset.status;
             
             try {
-                const response = await fetch(`http://localhost:5000/api/connections/respond/${requesterId}`, {
+                const response = await fetch(`/api/connections/respond/${requesterId}`, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json', 'x-auth-token': token },
                     body: JSON.stringify({ status })

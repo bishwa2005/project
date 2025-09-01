@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const skills = document.getElementById('skills').value.split(',').map(skill => skill.trim());
             const bio = document.getElementById('bio').value;
             try {
-                const response = await fetch('http://localhost:5000/api/auth/register', {
+                const response = await fetch('/api/auth/register', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ name, email, password, domain, skills, bio }),
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             try {
-                const response = await fetch('http://localhost:5000/api/auth/login', {
+                const response = await fetch('/api/auth/login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, password }),

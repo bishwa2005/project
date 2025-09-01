@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     const loadUserDetails = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/auth/me', { headers: { 'x-auth-token': token } });
+            const response = await fetch('/api/auth/me', { headers: { 'x-auth-token': token } });
             if (!response.ok) { localStorage.removeItem('token'); window.location.href = 'login.html'; return; }
             const loggedInUser = await response.json();
             userNameDisplay.textContent = `Welcome, ${loggedInUser.name}`;
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
 
     const fetchQuestionAndAnswers = async () => {
-        const response = await fetch(`http://localhost:5000/api/forum/questions/${questionId}`, { headers: { 'x-auth-token': token } });
+        const response = await fetch(`/api/forum/questions/${questionId}`, { headers: { 'x-auth-token': token } });
         const data = await response.json();
         questionDetails.innerHTML = `<h2>${data.question.title}</h2><p>${data.question.body}</p><small>Asked by: ${data.question.author_name}</small>`;
         answersList.innerHTML = '';
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     postAnswerForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const body = document.getElementById('answer-body').value;
-        await fetch(`http://localhost:5000/api/forum/questions/${questionId}/answers`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-auth-token': token }, body: JSON.stringify({ body }) });
+        await fetch(`/api/forum/questions/${questionId}/answers`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-auth-token': token }, body: JSON.stringify({ body }) });
         fetchQuestionAndAnswers();
         postAnswerForm.reset();
     });
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.body.addEventListener('click', async (e) => {
         if (e.target.classList.contains('accept-answer-btn')) {
             const answerId = e.target.dataset.answerId;
-            await fetch(`http://localhost:5000/api/forum/answers/${answerId}/accept`, { method: 'PUT', headers: { 'x-auth-token': token } });
+            await fetch(`/api/forum/answers/${answerId}/accept`, { method: 'PUT', headers: { 'x-auth-token': token } });
             fetchQuestionAndAnswers();
         }
     });

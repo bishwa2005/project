@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const loadUserDetails = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/auth/me', { headers: { 'x-auth-token': token } });
+            const response = await fetch('/api/auth/me', { headers: { 'x-auth-token': token } });
             loggedInUser = await response.json();
             // Populate navbar
         } catch(e) { console.error("Could not load user details"); }
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const typingIndicator = appendMessage('...', 'ai', true);
 
         try {
-            const response = await fetch('http://localhost:5000/api/ai/chat', {
+            const response = await fetch('/api/ai/chat', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const loadUserDetails = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/auth/me', { headers: { 'x-auth-token': token } });
+            const response = await fetch('/api/auth/me', { headers: { 'x-auth-token': token } });
             if (!response.ok) {
                 localStorage.removeItem('token');
                 window.location.href = 'login.html';
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const fetchUsers = async () => {
         const nameQuery = searchInput.value;
         const domainQuery = domainFilter.value;
-        let url = 'http://localhost:5000/api/users?';
+        let url = '/api/users?';
         if (nameQuery) url += `name=${nameQuery}&`;
         if (domainQuery) url += `domain=${domainQuery}`;
 
@@ -57,14 +57,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const fetchConnections = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/users/connections', { headers: { 'x-auth-token': token } });
+            const response = await fetch('/api/users/connections', { headers: { 'x-auth-token': token } });
             myConnections = await response.json();
         } catch (error) { console.error('Error fetching connections:', error); }
     };
     
     const fetchNotifications = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/connections/requests', { headers: { 'x-auth-token': token } });
+            const response = await fetch('/api/connections/requests', { headers: { 'x-auth-token': token } });
             const requests = await response.json();
             if (requests.length > 0) {
                 notificationBadge.textContent = requests.length;
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // --- NEW: Logic to determine the profile picture source ---
             const imgSrc = (user.profile_picture && user.profile_picture !== 'default-avatar.png')
-                ? `http://localhost:5000/uploads/${user.profile_picture}`
+                ? `/uploads/${user.profile_picture}`
                 : `https://placehold.co/80x80/EFEFEF/AAAAAA&text=${user.name.charAt(0)}`;
 
             const card = `
@@ -135,11 +135,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('click', async (e) => {
         const userId = e.target.dataset.userId;
         if (e.target.classList.contains('connect-btn')) {
-            await fetch(`http://localhost:5000/api/connections/send/${userId}`, { method: 'POST', headers: { 'x-auth-token': token } });
+            await fetch(`/api/connections/send/${userId}`, { method: 'POST', headers: { 'x-auth-token': token } });
             fetchData();
         }
         if (e.target.classList.contains('disconnect-btn')) {
-            await fetch(`http://localhost:5000/api/connections/disconnect/${userId}`, { method: 'DELETE', headers: { 'x-auth-token': token } });
+            await fetch(`/api/connections/disconnect/${userId}`, { method: 'DELETE', headers: { 'x-auth-token': token } });
             fetchData();
         }
     });

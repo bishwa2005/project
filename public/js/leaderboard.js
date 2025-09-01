@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     const loadUserDetails = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/auth/me', { headers: { 'x-auth-token': token } });
+            const response = await fetch('/api/auth/me', { headers: { 'x-auth-token': token } });
             if (!response.ok) { localStorage.removeItem('token'); window.location.href = 'login.html'; return; }
             const loggedInUser = await response.json();
             userNameDisplay.textContent = `Welcome, ${loggedInUser.name}`;
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const fetchLeaderboard = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/users/ranking', { headers: { 'x-auth-token': token } });
+            const response = await fetch('/api/users/ranking', { headers: { 'x-auth-token': token } });
             const users = await response.json();
             leaderboardList.innerHTML = '';
             if (users.length === 0) {

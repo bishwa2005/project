@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Fetches details of the currently logged-in user
     const loadUserDetails = async () => {
         try {
-            const meResponse = await fetch('http://localhost:5000/api/auth/me', { headers: { 'x-auth-token': token } });
+            const meResponse = await fetch('/api/auth/me', { headers: { 'x-auth-token': token } });
             if (!meResponse.ok) {
                 localStorage.removeItem('token');
                 window.location.href = 'login.html';
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Fetches all details for the profile being viewed
     const fetchAndRenderProfile = async () => {
         try {
-            const response = await fetch(`http://localhost:5000/api/profile/${userId}`, { headers: { 'x-auth-token': token } });
+            const response = await fetch(`/api/profile/${userId}`, { headers: { 'x-auth-token': token } });
             if (!response.ok) throw new Error('Failed to fetch profile');
             const profile = await response.json();
             renderProfile(profile);
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Render Profile Picture
         if (user.profile_picture && user.profile_picture !== 'default-avatar.png') {
-            profilePictureImg.src = `http://localhost:5000/uploads/${user.profile_picture}`;
+            profilePictureImg.src = `/uploads/${user.profile_picture}`;
         } else {
             profilePictureImg.src = `https://placehold.co/150x150/EFEFEF/AAAAAA&text=${user.name.charAt(0)}`;
         }
@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const username = url.split('/').filter(Boolean).pop();
         const container = document.getElementById('leetcode-stats-container');
         try {
-            const res = await fetch(`http://localhost:5000/api/platforms/leetcode/${encodeURIComponent(username)}`, { headers: { 'x-auth-token': token } });
+            const res = await fetch(`/api/platforms/leetcode/${encodeURIComponent(username)}`, { headers: { 'x-auth-token': token } });
             if (!res.ok) throw new Error();
             const data = await res.json();
             const stats = data.submitStatsGlobal?.acSubmissionNum;
@@ -171,7 +171,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const container = document.getElementById('codeforces-stats-container');
         container.innerHTML = `<p class="text-muted small">Loading...</p>`;
         try {
-            const res = await fetch(`http://localhost:5000/api/platforms/codeforces/${encodeURIComponent(username)}`, { headers: { 'x-auth-token': token } });
+            const res = await fetch(`/api/platforms/codeforces/${encodeURIComponent(username)}`, { headers: { 'x-auth-token': token } });
             const text = await res.text();
             let data;
             try { data = JSON.parse(text); } catch (_) { data = text; }
@@ -223,7 +223,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (!loggedInUser) { alert('User data is still loading, please try again.'); return; }
         const newProject = { title: document.getElementById('project-title').value, description: document.getElementById('project-description').value, project_url: document.getElementById('project-url').value, is_current: document.getElementById('project-is-current').checked };
         try {
-            const response = await fetch('http://localhost:5000/api/profile/projects', { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-auth-token': token }, body: JSON.stringify(newProject) });
+            const response = await fetch('/api/profile/projects', { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-auth-token': token }, body: JSON.stringify(newProject) });
             if (!response.ok) { const errorData = await response.json(); throw new Error(errorData.msg || 'Failed to add project'); }
             bootstrap.Modal.getInstance(document.getElementById('addProjectModal')).hide();
             addProjectForm.reset();
@@ -243,7 +243,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             leetcode_url: document.getElementById('edit-leetcode').value, 
             codeforces_url: document.getElementById('edit-codeforces').value
         };
-        await fetch('http://localhost:5000/api/profile/me', {
+        await fetch('/api/profile/me', {
             method: 'PUT', headers: { 'Content-Type': 'application/json', 'x-auth-token': token },
             body: JSON.stringify(updatedProfile)
         });
@@ -252,7 +252,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const newEmail = document.getElementById('edit-email').value;
         const newPassword = document.getElementById('edit-password').value;
         if (currentPassword && (newEmail || newPassword)) {
-            await fetch('http://localhost:5000/api/profile/credentials', {
+            await fetch('/api/profile/credentials', {
                 method: 'PUT', headers: { 'Content-Type': 'application/json', 'x-auth-token': token },
                 body: JSON.stringify({ currentPassword, newEmail, newPassword })
             });
@@ -280,7 +280,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             }).then(async (result) => {
                 if (result.isConfirmed) {
                     // If user confirms, proceed with the deletion
-                    await fetch(`http://localhost:5000/api/profile/projects/${projectId}`, { 
+                    await fetch(`/api/profile/projects/${projectId}`, { 
                         method: 'DELETE', 
                         headers: { 'x-auth-token': token } 
                     });
@@ -308,7 +308,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const uploadStatus = document.getElementById('upload-status');
         uploadStatus.textContent = 'Uploading...';
         try {
-            const response = await fetch('http://localhost:5000/api/profile/photo', {
+            const response = await fetch('/api/profile/photo', {
                 method: 'POST',
                 headers: { 'x-auth-token': token },
                 body: formData,
