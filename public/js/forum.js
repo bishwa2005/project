@@ -41,32 +41,33 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
 
     function renderQuestions(questions) {
-        questionsList.innerHTML = '';
-        if (questions.length === 0) {
-            questionsList.innerHTML = '<p class="text-muted">No questions have been asked yet. Be the first!</p>';
-            return;
-        }
-        questions.forEach(q => {
-            const deleteButton = (loggedInUser && loggedInUser.id === q.user_id)
-                ? `<button class="btn btn-sm btn-outline-danger delete-question-btn" data-question-id="${q.id}"><i class="bi bi-trash"></i></button>`
-                : '';
-
-            const questionElement = `
-                <div class="list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-between">
-                        <a href="question.html?id=${q.id}" class="text-decoration-none text-dark flex-grow-1">
-                            <h5 class="mb-1">${q.title}</h5>
-                        </a>
-                        <div class="d-flex align-items-center">
-                            <small class="text-muted me-3">Asked by: ${q.author_name}</small>
-                            ${deleteButton}
-                        </div>
-                    </div>
-                    <p class="mb-1 text-muted">${q.body.substring(0, 100)}...</p>
-                </div>`;
-            questionsList.innerHTML += questionElement;
-        });
+    questionsList.innerHTML = '';
+    if (questions.length === 0) {
+        questionsList.innerHTML = '<p class="text-muted">No questions yet. Be the first!</p>';
+        return;
     }
+    questions.forEach(q => {
+        // This conditional logic now works because q.user_id is available
+        const deleteButton = (loggedInUser && loggedInUser.id === q.user_id)
+            ? `<button class="btn btn-sm btn-outline-danger delete-question-btn" data-question-id="${q.id}"><i class="bi bi-trash"></i></button>`
+            : '';
+
+        const questionElement = `
+            <div class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                    <a href="question.html?id=${q.id}" class="text-decoration-none text-dark flex-grow-1">
+                        <h5 class="mb-1">${q.title}</h5>
+                    </a>
+                    <div class="d-flex align-items-center">
+                        <small class="text-muted me-3">Asked by: ${q.author_name}</small>
+                        ${deleteButton}
+                    </div>
+                </div>
+                <p class="mb-1 text-muted">${q.body.substring(0, 100)}...</p>
+            </div>`;
+        questionsList.innerHTML += questionElement;
+    });
+}
 
     askQuestionForm.addEventListener('submit', async (e) => {
         e.preventDefault();

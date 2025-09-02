@@ -16,8 +16,12 @@ export const askQuestion = async (req, res) => {
 
 export const getAllQuestions = async (req, res) => {
     try {
-        const query = `SELECT q.id, q.title, q.body, u.name as author_name FROM questions q JOIN users u ON q.user_id = u.id ORDER BY q.created_at DESC`;
-        const result = await db.query(query);
+        const query = `
+            SELECT q.id, q.title, q.body, q.user_id, u.name as author_name 
+            FROM questions q 
+            JOIN users u ON q.user_id = u.id 
+            ORDER BY q.created_at DESC`;
+            const result = await db.query(query);
         res.json(result.rows);
     } catch (err) {
         res.status(500).send('Server Error');
