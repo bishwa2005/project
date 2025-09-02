@@ -4,6 +4,13 @@ import path from 'path';
 import { getProfileById, updateMyProfile, addProject, deleteProject, uploadProfilePhoto, updateCredentials } from '../controllers/profileController.js';
 import authMiddleware from '../middleware/authMiddleware.js';
 
+const uploadDir = 'uploads/';
+
+// --- FIX: Ensure the upload directory exists ---
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir);
+}
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'uploads/');
