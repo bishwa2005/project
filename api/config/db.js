@@ -1,14 +1,14 @@
 import pg from 'pg';
-
+import 'dotenv/config'; // For local development
 
 const { Pool } = pg;
 
+// This new configuration reads the connection string from an environment variable.
 const pool = new Pool({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'college_connect_db',
-    password: '180905',
-    port: 5432,
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 const db = {
