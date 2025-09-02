@@ -1,6 +1,7 @@
 import express from 'express';
 import multer from 'multer';
 import path from 'path';
+import fs from 'fs';
 import { getProfileById, updateMyProfile, addProject, deleteProject, uploadProfilePhoto, updateCredentials } from '../controllers/profileController.js';
 import authMiddleware from '../middleware/authMiddleware.js';
 
