@@ -75,3 +75,31 @@ export const acceptAnswer = async (req, res) => {
         res.status(500).send('Server Error');
     }
 };
+
+export const deleteQuestion = async (req, res) => {
+    try {
+        const { questionId } = req.params;
+        const userId = req.user.id; // ID of the user making the request
+
+        // First, verify that the user requesting deletion is the one who created the question
+        const questionQuery = 'SELECT user_id FROM questions WHERE id = $1';
+        const questionResult = await db.query(questionQuery, [questionId]);
+
+        if (questionResult.rows.length === 0) {
+            return res.status(404).json({ msg: 'Question not found.' });
+        }
+
+        if (questionResult.rows[0].user_id !== userId) {
+            return res.status(401).json({ msg: 'User not authorized to delete this question.' });
+        }
+        
+        // If authorized, delete the question
+        await db.query('DELETE FROM questions WHERE id = $1', [questionId]);
+
+        res.json({ msg: 'Question deleted successfully.' });
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+};
