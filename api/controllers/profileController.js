@@ -84,22 +84,24 @@ export const deleteProject = async (req, res) => {
 };
 
 export const uploadProfilePhoto = async (req, res) => {
-    try {
-        if (!req.file) {
-            return res.status(400).json({ msg: 'No file uploaded.' });
-        }
-        const filename = req.file.filename;
-        const userId = req.user.id;
-        const query = `UPDATE users SET profile_picture = $1 WHERE id = $2 RETURNING profile_picture`;
-        const result = await db.query(query, [filename, userId]);
-        res.json({ 
-            msg: 'Profile photo updated successfully.',
-            filePath: `/uploads/${result.rows[0].profile_picture}`
-        });
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error');
+  try {
+    if (!req.file || !req.file.path) {
+      return res.status(400).json({ msg: 'No file uploaded.' });
     }
+    const fileUrl = req.file.path; // Cloudinary gives a hosted URL
+    const userId = req.user.id;
+
+    const query = `UPDATE users SET profile_picture = $1 WHERE id = $2 RETURNING profile_picture`;
+    const result = await db.query(query, [fileUrl, userId]);
+
+    res.json({
+      msg: 'Profile photo updated successfully.',
+      fileUrl: result.rows[0].profile_picture
+    });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
 };
 
 export const updateCredentials = async (req, res) => {

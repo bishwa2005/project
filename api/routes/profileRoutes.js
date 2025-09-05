@@ -1,20 +1,34 @@
 import express from 'express';
+import { v2 as cloudinary } from 'cloudinary';
+import { CloudinaryStorage } from 'multer-storage-cloudinary';
 import multer from 'multer';
-import path from 'path';
-import { getProfileById, updateMyProfile, addProject, deleteProject, uploadProfilePhoto, updateCredentials } from '../controllers/profileController.js';
+import {
+  getProfileById,
+  updateMyProfile,
+  addProject,
+  deleteProject,
+  uploadProfilePhoto,
+  updateCredentials
+} from '../controllers/profileController.js';
 import authMiddleware from '../middleware/authMiddleware.js';
 
-
-
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'uploads/');
-    },
-    filename: function (req, file, cb) {
-        cb(null, `user-${req.user.id}-${Date.now()}${path.extname(file.originalname)}`);
-    }
+// Configure Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
 });
-const upload = multer({ storage: storage });
+
+// Multer with Cloudinary storage
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: 'college-connect-profiles',
+    allowed_formats: ['jpg', 'png', 'jpeg']
+  },
+});
+
+const upload = multer({ storage });
 
 const router = express.Router();
 
