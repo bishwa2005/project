@@ -7,7 +7,132 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="style.css">
-     </head>
+    <style>
+        /* ...paste CSS here... */
+        /* Chat container styles for AI Buddy */
+.chat-container {
+    max-width: 480px;
+    margin: 48px auto 0 auto;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(30,99,255,0.10), 0 1.5px 8px rgba(0,0,0,0.04);
+    display: flex;
+    flex-direction: column;
+    min-height: 480px;
+    overflow: hidden;
+}
+
+.chat-log {
+    flex: 1 1 auto;
+    padding: 24px 18px 12px 18px;
+    overflow-y: auto;
+    background: #f6f8fc;
+}
+
+.chat-message {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 18px;
+}
+
+.chat-message.ai-message .avatar {
+    background: #eaf1ff;
+    color: #1e63ff;
+}
+
+.chat-message.user-message {
+    flex-direction: row-reverse;
+}
+
+.chat-message.user-message .avatar {
+    background: #ffe9e9;
+    color: #d81b60;
+}
+
+.avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #eaf1ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin: 0 12px;
+    box-shadow: 0 2px 8px rgba(30,99,255,0.08);
+}
+
+.message-content {
+    background: #fff;
+    border-radius: 10px;
+    padding: 12px 18px;
+    font-size: 1.05rem;
+    box-shadow: 0 1px 4px rgba(30,99,255,0.04);
+    max-width: 75%;
+    word-break: break-word;
+}
+
+.chat-message.user-message .message-content {
+    background: #eaf1ff;
+    color: #1e63ff;
+    text-align: right;
+}
+
+.chat-input-area {
+    border-top: 1px solid #e3e8f0;
+    background: #f8fafd;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+}
+
+#ai-chat-form {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+}
+
+#ai-chat-input {
+    flex: 1 1 auto;
+    border-radius: 8px;
+    border: 1px solid #d0d7e2;
+    padding: 10px 14px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+#ai-chat-input:focus {
+    border-color: #1e63ff;
+    box-shadow: 0 0 0 2px rgba(30,99,255,0.10);
+}
+
+#ai-chat-form button {
+    border-radius: 8px;
+    padding: 0 18px;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 600px) {
+    .chat-container {
+        max-width: 100vw;
+        margin: 0;
+        border-radius: 0;
+        min-height: 100vh;
+    }
+    .chat-log {
+        padding: 14px 4vw 8px 4vw;
+    }
+    .chat-input-area {
+        padding: 10px 4vw;
+    }
+}
+    </style>
+</head>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class="container-fluid">
         <a class="navbar-brand" href="connect.html">College Connect</a>
