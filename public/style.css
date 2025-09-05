@@ -85,3 +85,97 @@ footer a:hover {
 }
 
 
+.chat-container {
+    max-width: 800px;
+    height: 80vh;
+    margin: 30px auto;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+/* Chat Log */
+.chat-log {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background: #fdfdfd;
+}
+
+/* Scrollbar Styling */
+.chat-log::-webkit-scrollbar {
+    width: 8px;
+}
+.chat-log::-webkit-scrollbar-thumb {
+    background: #bbb;
+    border-radius: 5px;
+}
+.chat-log::-webkit-scrollbar-thumb:hover {
+    background: #999;
+}
+
+/* Chat Messages */
+.chat-message {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+/* AI Message */
+.ai-message .avatar {
+    font-size: 24px;
+    margin-right: 10px;
+}
+.ai-message .message-content {
+    background: #e9f5ff;
+    padding: 12px 18px;
+    border-radius: 15px 15px 15px 0;
+    max-width: 70%;
+    font-size: 15px;
+    line-height: 1.4;
+    color: #333;
+}
+
+/* User Message */
+.user-message {
+    justify-content: flex-end;
+}
+.user-message .message-content {
+    background: #007bff;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 15px 15px 0 15px;
+    max-width: 70%;
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+/* Chat Input Area */
+.chat-input-area {
+    display: flex;
+    padding: 12px;
+    border-top: 1px solid #ddd;
+    background: #fff;
+}
+.chat-input-area form {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+}
+.chat-input-area input {
+    flex: 1;
+    border-radius: 25px;
+    padding: 12px 18px;
+    font-size: 15px;
+}
+.chat-input-area button {
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
