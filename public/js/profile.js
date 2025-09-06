@@ -23,7 +23,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // --- 2. DATA FETCHING FUNCTIONS ---
 
-    // Fetches details of the currently logged-in user
     const loadUserDetails = async () => {
         try {
             const meResponse = await fetch('/api/auth/me', { headers: { 'x-auth-token': token } });
@@ -40,7 +39,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     };
     
-    // Fetches all details for the profile being viewed
     const fetchAndRenderProfile = async () => {
         try {
             const response = await fetch(`/api/profile/${userId}`, { headers: { 'x-auth-token': token } });
@@ -61,9 +59,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         const editProfileButton = isOwnProfile ? `<button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#editProfileModal">Edit Profile</button>` : '';
         const addProjectButton = isOwnProfile ? `<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProjectModal">Add Project</button>` : '';
 
-        // Render Profile Picture
-        if (user.profile_picture && user.profile_picture !== 'default-avatar.png') {
-            profilePictureImg.src = `/uploads/${user.profile_picture}`;
+        // ✅ Render Profile Picture with Cloudinary URL
+        if (user.profile_picture) {
+            profilePictureImg.src = user.profile_picture;  // Cloudinary URL
         } else {
             profilePictureImg.src = `https://placehold.co/150x150/EFEFEF/AAAAAA&text=${user.name.charAt(0)}`;
         }
@@ -73,7 +71,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             profilePictureImg.parentElement.removeAttribute('title');
         }
 
-       
         profileMainContent.innerHTML = `
             <div class="card mb-4">
                 <div class="card-body">
@@ -145,7 +142,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <button type="submit" class="btn btn-primary">Save Changes</button>`;
         }
         
-        // Fetch and Render platform stats
         if (user.leetcode_url) fetchAndRenderLeetCode(user.leetcode_url);
         if (user.codeforces_url) fetchAndRenderCodeforces(user.codeforces_url);
     }
@@ -183,7 +179,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 return;
             }
 
-            // Accept several possible response shapes returned by different backends
             let submissions = [];
             if (Array.isArray(data)) submissions = data;
             else if (Array.isArray(data.result)) submissions = data.result;
@@ -196,7 +191,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 return;
             }
 
-            // Count unique solved problems (use problem name as identifier)
             const solved = new Set(
                 submissions
                     .filter(sub => sub.verdict === 'OK')
@@ -217,7 +211,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // --- 4. EVENT LISTENERS ---
 
-    // Handle "Add Project" form submission
     addProjectForm.addEventListener('submit', async e => {
         e.preventDefault();
         if (!loggedInUser) { alert('User data is still loading, please try again.'); return; }
@@ -231,7 +224,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         } catch (error) { console.error('Add project error:', error); alert(`There was an error: ${error.message}`); }
     });
 
-    // Handle "Edit Profile" form submission
     editProfileForm.addEventListener('submit', async e => {
         e.preventDefault();
         const updatedProfile = { 
@@ -262,13 +254,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         fetchAndRenderProfile();
     });
 
-    // Handle "Delete Project" button clicks
     document.addEventListener('click', async e => {
         const deleteButton = e.target.closest('.delete-project-btn');
         if (deleteButton) {
             const projectId = deleteButton.dataset.projectId;
-            
-            // Use SweetAlert2 for confirmation
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -279,27 +268,18 @@ document.addEventListener('DOMContentLoaded', async () => {
                 confirmButtonText: 'Yes, delete it!'
             }).then(async (result) => {
                 if (result.isConfirmed) {
-                    // If user confirms, proceed with the deletion
                     await fetch(`/api/profile/projects/${projectId}`, { 
                         method: 'DELETE', 
                         headers: { 'x-auth-token': token } 
                     });
-                    
-                    // Show a success message
-                    Swal.fire(
-                        'Deleted!',
-                        'Your project has been deleted.',
-                        'success'
-                    );
-                    
-                    fetchAndRenderProfile(); // Refresh the profile to show the change
+                    Swal.fire('Deleted!','Your project has been deleted.','success');
+                    fetchAndRenderProfile();
                 }
             });
         }
     });
 
-
-    // Handle photo upload
+    // ✅ Handle photo upload (Cloudinary)
     photoUploadInput.addEventListener('change', async (e) => {
         const file = e.target.files[0];
         if (!file) return;
