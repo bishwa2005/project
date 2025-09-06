@@ -17,12 +17,15 @@ export const register = async (req, res) => {
         const values = [name, email, hashedPassword, domain, skills, bio];
         const result = await db.query(newUserQuery, values);
         const newUser = result.rows[0];
+        
+        
+        // Create a token and send it back as a JSON response, just like in the login function.
         const payload = { user: { id: newUser.id } };
         jwt.sign(payload, JWT_SECRET, { expiresIn: 3600 }, (err, token) => {
             if (err) throw err;
-            const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5500';
-            res.redirect(`${FRONTEND_URL}/callback.html?token=${token}`);
+            res.status(201).json({ token });
         });
+
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');
