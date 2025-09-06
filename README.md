@@ -1,171 +1,53 @@
-College Connect
-<p align="center">
-<img src="https://www.google.com/search?q=https://i.imgur.com/your-logo-image-url.png" alt="College Connect Logo" width="400">
-</p>
+College Connect 🎓
+A full-stack web application designed to be a professional networking platform for college students. It allows students to showcase their skills, connect with peers, collaborate on projects, and build a supportive community.
 
-<p align="center">
-<strong>Your Network Starts Here.</strong>
-<br />
-A full-stack web application designed to help college students network, collaborate, and grow their professional skills in a dedicated community environment.
-</p>
-
-<p align="center">
-<a href="[suspicious link removed]"><strong>View Live Demo »</strong></a>
-</p>
-
-<p align="center">
-<img src="https://www.google.com/search?q=https://img.shields.io/badge/Node.js-339933%3Fstyle%3Dfor-the-badge%26logo%3Dnodedotjs%26logoColor%3Dwhite" alt="Node.js">
-<img src="https://www.google.com/search?q=https://img.shields.io/badge/Express.js-000000%3Fstyle%3Dfor-the-badge%26logo%3Dexpress%26logoColor%3Dwhite" alt="Express.js">
-<img src="https://www.google.com/search?q=https://img.shields.io/badge/PostgreSQL-316192%3Fstyle%3Dfor-the-badge%26logo%3Dpostgresql%26logoColor%3Dwhite" alt="PostgreSQL">
-<img src="https://www.google.com/search?q=https://img.shields.io/badge/JavaScript-F7DF1E%3Fstyle%3Dfor-the-badge%26logo%3Djavascript%26logoColor%3Dblack" alt="JavaScript">
-<img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel">
-<img src="https://www.google.com/search?q=https://img.shields.io/badge/Neon-019688%3Fstyle%3Dfor-the-badge%26logo%3Dneon%26logoColor%3Dwhite" alt="NeonDB">
-</p>
-
-🚀 About The Project
-College Connect is a platform built to solve a common problem for students: finding the right people to collaborate with and getting help when you're stuck. It goes beyond a simple social network by integrating features specifically tailored for students in tech, from showcasing coding profiles to a gamified contribution system.
-
-This project was built from the ground up with a decoupled architecture, featuring a robust Node.js API backend and a dynamic vanilla JavaScript frontend.
+Live Demo https://project-bishwas-projects-14579267.vercel.app
 
 ✨ Features
-Secure Authentication: Full email/password registration and login system with JWT-based authentication.
+College Connect is packed with features to help students succeed and network effectively:
 
-Dynamic User Profiles:
+Authentication: Secure user registration and login with both email/password and "Continue with Google" (OAuth 2.0).
 
-Upload a custom profile photo.
+Dynamic Profiles: Users can create and edit detailed profiles, including:
 
-Showcase bio, skills, and contact information.
+Profile Picture Uploads (hosted on Cloudinary)
 
-Add and manage current and completed projects.
+Bio, Skills, and Domain of Interest
 
-Coding Platform Integration:
+Contact Information (Email, WhatsApp, X, LinkedIn)
 
-Dynamically fetch and display problem-solving stats from LeetCode and Codeforces.
+A showcase for personal projects (current and completed)
 
-Connection System:
+Coding Platform Integration: Automatically fetch and display problem-solving stats from:
 
-Send, receive, and manage connection requests.
+LeetCode
 
-View a private list of your accepted connections.
+Codeforces
 
-Q&A Forum:
+Connection System: A LinkedIn-style connection system where users can send, receive, accept, and reject connection requests.
 
-Ask questions and post answers within the community.
+Q&A Forum: A fully functional forum where users can:
 
-Authors can mark the "best answer" to their questions.
+Post questions and answers.
 
-Users can delete their own questions.
+Delete their own questions.
 
-Gamified Leaderboard:
+Mark an answer as the "Best Answer."
 
-Earn points for asking questions, answering, and having answers accepted.
+Contribution & Ranking System:
 
-View a ranked leaderboard of the top contributors on the platform.
+Users earn points for asking questions and providing helpful answers.
 
-AI Buddy:
+A live Leaderboard displays the top contributors on the platform.
 
-An integrated chatbot powered by the Google Gemini API to assist students with studies, career advice, and more.
+Each user's rank is displayed on their profile.
 
-📸 Screenshots
-(Replace these with links to your actual screenshots)
+AI Buddy: An integrated chat interface powered by the Gemini API to provide students with advice on studies and careers.
+<img width="1919" height="866" alt="image" src="https://github.com/user-attachments/assets/5898b05e-497a-4ce9-b476-177372b000d5" />
+<img width="1919" height="872" alt="image" src="https://github.com/user-attachments/assets/2785ed09-45f7-4cb6-a6f1-78984960b359" />
+<img width="1919" height="867" alt="image" src="https://github.com/user-attachments/assets/02c60482-5bcf-49e8-ba2d-a6abe31c7205" />
 
-Login Page
 
-Connect Page
 
-Profile Page
+Peer Discovery: A "Connect" page with live search and filtering to find other students by name or domain.
 
-
-
-
-
-
-
-🛠️ Tech Stack
-Backend
-Runtime: Node.js
-
-Framework: Express.js
-
-Database: PostgreSQL
-
-Authentication: JSON Web Tokens (JWT), Bcrypt.js
-
-File Storage: Cloudinary for profile photo uploads
-
-External APIs: Google Gemini API, Unofficial APIs for LeetCode & Codeforces
-
-Frontend
-Core: HTML5, CSS3, Vanilla JavaScript (ES6+)
-
-Styling: Bootstrap 5
-
-UI Enhancements: SweetAlert2 for modern dialogs
-
-Deployment
-Hosting: Vercel (Frontend + Serverless Backend)
-
-Database: NeonDB (Serverless PostgreSQL)
-
-⚙️ Getting Started
-To get a local copy up and running, follow these simple steps.
-
-Prerequisites
-Node.js (v18 or later)
-
-A running instance of PostgreSQL
-
-Installation
-Clone the repo:
-
-git clone [https://github.com/your-username/college-connect.git](https://github.com/your-username/college-connect.git)
-cd college-connect
-
-Backend Setup:
-
-Navigate to the backend directory:
-
-cd api
-
-Install NPM packages:
-
-npm install
-
-Set up your PostgreSQL database and run the queries from sql_setup.sql.
-
-Create a .env file in the api/ directory and add your secret keys. Use .env.example as a template:
-
-# Database Credentials (from Neon or local setup)
-DATABASE_URL="postgres://USER:PASSWORD@HOST/DATABASE"
-
-# JWT Secret
-JWT_SECRET="your-long-random-jwt-secret"
-
-# Google Gemini API Key
-GEMINI_API_KEY="your-gemini-api-key"
-
-# Cloudinary Credentials for image uploads
-CLOUDINARY_CLOUD_NAME="your-cloud-name"
-CLOUDINARY_API_KEY="your-api-key"
-CLOUDINARY_API_SECRET="your-api-secret"
-
-Start the backend server:
-
-npm start
-
-The API will be running on http://localhost:5000.
-
-Frontend Setup:
-
-Open another terminal and navigate to the frontend directory:
-
-cd public
-
-The simplest way to run the frontend is with the Live Server extension in VS Code. Right-click on index.html and select "Open with Live Server".
-
-Ensure your frontend API calls in the .js files point to http://localhost:5000.
-
-👤 Contact
-Bishwa Ranjan Routray - LinkedIn - your.email@example.com
-
-Project Link: https://github.com/your-username/college-connect
