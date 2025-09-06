@@ -18,18 +18,19 @@ router.get('/google', passport.authenticate('google', { scope: ['profile', 'emai
 
 // Google callback route
 // Google redirects here after successful login
+const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
+
 router.get(
   '/google/callback',
   passport.authenticate('google', { session: false }),
   (req, res) => {
-    // User is authenticated by passport, 'req.user' is now available
     const payload = { user: { id: req.user.id } };
     const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '1h' });
-    
-    // Redirect user back to the frontend with the token
-    res.redirect(`http://localhost:3000/frontend/callback.html?token=${token}&userId=${req.user.id}`);
+
+    res.redirect(`${FRONTEND_URL}/callback.html?token=${token}&userId=${req.user.id}`);
   }
 );
+
 
 
 export default router;
