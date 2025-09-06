@@ -1,7 +1,7 @@
 College Connect 🎓
 A full-stack web application designed to be a professional networking platform for college students. It allows students to showcase their skills, connect with peers, collaborate on projects, and build a supportive community.
 
-Live Demo https://project-bishwas-projects-14579267.vercel.app
+Live Demo (https://project-bishwas-projects-14579267.vercel.app/?_vercel_share=VNEfkiwZ6c4dvdrGhJEefcQiP5fZPcAD)
           https://project-brown-two.vercel.app/
 
 ✨ Features
@@ -51,5 +51,6 @@ AI Buddy: An integrated chat interface powered by the Gemini API to provide stud
 
 
 Peer Discovery: A "Connect" page with live search and filtering to find other students by name or domain.
+
 
 
